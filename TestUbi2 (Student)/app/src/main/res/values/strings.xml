@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestUbi2</string>
+    <string name="app_name">Equipo 2 - Casa Inteligente</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

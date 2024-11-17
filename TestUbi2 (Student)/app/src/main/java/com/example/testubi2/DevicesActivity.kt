@@ -25,8 +25,10 @@ class DevicesActivity : AppCompatActivity() {
 
         val devices = ArrayList<DeviceClass>()
 
-        devices.add(DeviceClass("Sala de TV", "https://cdn-icons-png.flaticon.com/512/100/100445.png"))
-        devices.add(DeviceClass("Cocina", "https://cdn-icons-png.flaticon.com/512/1619/1619095.png"))
+        devices.add(DeviceClass("Temp", "thermometer"))
+        devices.add(DeviceClass("Humedad", "humiditysensor"))
+        devices.add(DeviceClass("Luz", "idea"))
+        devices.add(DeviceClass("Personas", "user"))
 
         rvDevice = findViewById(R.id.rv_device)
         deviceAdapter = DeviceAdapter(devices)

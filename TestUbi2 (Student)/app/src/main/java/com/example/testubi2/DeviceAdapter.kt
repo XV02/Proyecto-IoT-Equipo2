@@ -32,16 +32,35 @@ class DeviceAdapter (private val dataList: ArrayList<DeviceClass>): RecyclerView
     }
 
     override fun onBindViewHolder(holder: DeviceViewHolder, position: Int) {
-        holder.deviceName.text = dataList[position].name
-        Picasso.get().load(dataList[position].photo).into(deviceImage)
+            holder.deviceName.text = dataList[position].name
 
-        holder.deviceImage.setOnClickListener {
-            val context=holder.deviceImage.context
-            val intent = Intent( context, MainActivity::class.java)
-            context.startActivity(intent)
+        val photo = dataList[position].photo
+
+        // Check if the photo is a remote URL or local resource
+        if (photo.startsWith("http://") || photo.startsWith("https://")) {
+            // Remote image URL
+            Picasso.get().load(photo).into(holder.deviceImage)
+        } else {
+            // Local drawable resource
+            val context = holder.deviceImage.context
+            val resourceId = context.resources.getIdentifier(photo, "drawable", context.packageName)
+
+            if (resourceId != 0) {
+                Picasso.get().load(resourceId).into(holder.deviceImage)
+            }
         }
 
+        holder.deviceImage.scaleType = ImageView.ScaleType.CENTER_INSIDE
+        holder.deviceImage.adjustViewBounds = true
+
+        holder.deviceImage.setOnClickListener {
+            val context = holder.deviceImage.context
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra("deviceName", dataList[position].name)
+            context.startActivity(intent)
+        }
     }
+
 
     override fun getItemCount(): Int {
         if (dataList.size > 0){

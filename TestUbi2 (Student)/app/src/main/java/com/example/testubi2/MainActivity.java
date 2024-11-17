@@ -64,9 +64,11 @@ public class MainActivity extends Activity {
 
 
     public class ApiUbidots extends AsyncTask<Integer, ProgressUpdate, Void> {
-        private final String API_KEY_UBIDOTS = "BBUS-af2a914720bfaccf3fbb003d604ce7356a7";
-        private final String TempVariable_ID = "6733b3e9735fd8057b60fea3";
-        private final String HumVariable_ID = "6733b3ff5d27510503060665";
+        private final String API_KEY_UBIDOTS = "BBUS-628c3827b7bd2729999bc33613af3378257";
+        private final String TempVariable_ID = "67297f7b87a2979b04503b60";
+        private final String HumVariable_ID = "67297f919bcbc9a2227b83c2";
+        private final String LigthVariable_ID = "67297fbdb869fe9b669d1fba";
+        private final String CounterVariable_ID = "6738cd8fbe6e5025553f0c31";
         private final String API_BASE_URL = "http://industrial.api.ubidots.com/api/v1.6/";
 
 
@@ -77,12 +79,18 @@ public class MainActivity extends Activity {
                     ApiClient apiClient = new ApiClient(API_KEY_UBIDOTS, API_BASE_URL); //API_KEY de Ubidots
                     Variable temperatura = apiClient.getVariable(TempVariable_ID); //Obtener referencia a la variable de temperatura con su ID
                     Variable humedad = apiClient.getVariable(HumVariable_ID); //Obtener referencia a la variable de humedad con su ID
+                    Variable luz = apiClient.getVariable(LigthVariable_ID); //Obtener referencia a la variable de luz con su ID
+                    Variable contador = apiClient.getVariable(CounterVariable_ID); //Obtener referencia a la variable de contador con su ID
 
                     String tempLastValue = temperatura.getLastValue();
                     String humLastValue = humedad.getLastValue();
+                    String luzLastValue = luz.getLastValue();
+                    String contLastValue = contador.getLastValue();
 
                     Log.wtf("UBIDOTS", tempLastValue);
                     Log.wtf("UBIDOTS", humLastValue);
+                    Log.wtf("UBIDOTS", luzLastValue);
+                    Log.wtf("UBIDOTS", contLastValue);
 
                     publishProgress(new ProgressUpdate(tempLastValue, humLastValue)); //actualizar UI con valores actuales
                 } catch (Exception e) {
