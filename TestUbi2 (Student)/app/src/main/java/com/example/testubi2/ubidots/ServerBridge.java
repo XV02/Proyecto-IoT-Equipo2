@@ -172,8 +172,8 @@ public class ServerBridge {
 				params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
 
 			}
-			path.concat("?");
-			path.concat(URLEncodedUtils.format(params, "utf8"));
+			path = path.concat("?");
+			path = path.concat(URLEncodedUtils.format(params, "utf8"));
 		}
 
 		try (CloseableHttpClient client = HttpClientBuilder.create().build()) {

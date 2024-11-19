@@ -28,10 +28,12 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".ForgotPassword"
-            android:exported="false"></activity>
+            android:exported="false" />
+        <activity android:name=".AdminActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

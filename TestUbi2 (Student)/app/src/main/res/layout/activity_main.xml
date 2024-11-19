@@ -23,12 +23,12 @@ tools:context=".MainActivity"
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ESP32 CONTROL CLIMÁTICO"
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:textColor="@color/black"
+            android:layout_marginBottom="50dp"
             android:gravity="center"
-            android:layout_marginBottom="50dp"/>
+            android:text="ESP32 EQUIPO 2 - DOMÓTICA"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -48,7 +48,7 @@ tools:context=".MainActivity"
                 >
 
                 <TextView
-                    android:id="@+id/variableTemp"
+                    android:id="@+id/mainVarTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -57,23 +57,23 @@ tools:context=".MainActivity"
                     android:textSize="20sp" />
 
                 <ImageView
-                    android:id="@+id/tempImg"
+                    android:id="@+id/mainImg"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/variableTemp"
+                    android:layout_below="@+id/mainVarTitle"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/thermometer"
                     app:tint="#006400" />
 
                 <TextView
-                    android:id="@+id/temperatura"
+                    android:id="@+id/mainValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/variableTemp"
+                    android:layout_below="@+id/mainVarTitle"
                     android:layout_marginLeft="60dp"
                     android:layout_marginTop="12dp"
-                    android:layout_toRightOf="@+id/tempImg"
+                    android:layout_toRightOf="@+id/mainImg"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="30dp" />
@@ -82,56 +82,10 @@ tools:context=".MainActivity"
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:backgroundTint="#f4f4f4"
+        <lecho.lib.hellocharts.view.LineChartView
+            android:id="@+id/lineChart"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/cv2"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="12sp"
-            >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:layout_marginTop="10dp"
-                >
-
-                <TextView
-                    android:id="@+id/variableHum"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Humedad (%)"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/humImg"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/variableHum"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/humiditysensor"
-                     />
-
-                <TextView
-                    android:id="@+id/humedad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/variableHum"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_toRightOf="@+id/humImg"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="30dp" />
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
+            android:layout_height="300dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.ArrayList
 
 class DevicesActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class DevicesActivity : AppCompatActivity() {
     lateinit var deviceManager: RecyclerView.LayoutManager
     lateinit var logout_btn : Button
     lateinit var deviceCard : CardView
+    lateinit var adminButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -36,7 +38,28 @@ class DevicesActivity : AppCompatActivity() {
         rvDevice.adapter = deviceAdapter
         rvDevice.layoutManager = deviceManager
 
+
         logout_btn = findViewById(R.id.logout_btn)
+
+        adminButton = findViewById(R.id.adminButton)
+        adminButton.visibility = View.GONE
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.let { user ->
+            FirebaseFirestore.getInstance().collection("admins")
+                .whereEqualTo("email", user.email)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (!querySnapshot.isEmpty) {
+                        // User is an admin
+                        adminButton.visibility = View.VISIBLE
+                    }
+                }
+        }
+
+        adminButton.setOnClickListener{
+            val intent = Intent(this, AdminActivity::class.java)
+            startActivity(intent)
+        }
 
         logout_btn.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
