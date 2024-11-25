@@ -77,17 +77,17 @@ public class MainActivity extends Activity {
 
 
     public class ApiUbidots extends AsyncTask<Integer, ProgressUpdate, Void> {
-        private final String API_KEY_UBIDOTS = "BBUS-af2a914720bfaccf3fbb003d6xxxxxxx";
+        private final String API_KEY_UBIDOTS = "BBUS-af2a914720bfaccf3fbb003d604ce7356a7";
         private final String API_BASE_URL = "http://industrial.api.ubidots.com/api/v1.6/";
         private final Map<String, String> variableIds = new HashMap<>();
         private final Map<String, String> images = new HashMap<>();
         private final Map<String, String> titles = new HashMap<>();
 
         public ApiUbidots(){
-            final String TempVariable_ID = "6733b3e9735fd8057xxxxxx";
-            final String HumVariable_ID = "67297f919bcbc9a222xxxxxx";
-            final String LuzVariable_ID = "67297fbdb869fe9b66xxxxxx";
-            final String ContVariable_ID = "6738cd8fbe6e502555xxxxxx";
+            final String TempVariable_ID = "673d24ec437a0d09c52bdce6";
+            final String HumVariable_ID = "673d24ec896d3d09e652fa08";
+            final String LuzVariable_ID = "673d25007907c409153f7843";
+            final String ContVariable_ID = "673d25159d3745074dfa7d51";
             variableIds.put("Temp", TempVariable_ID);
             variableIds.put("Humedad", HumVariable_ID);
             variableIds.put("Luz", LuzVariable_ID);
@@ -161,6 +161,10 @@ public class MainActivity extends Activity {
                     axisValues.add(new AxisValue(i).setLabel(formattedTimestamp));
                 }
 
+                // Reverse the order of the points
+                Collections.reverse(points);
+                Collections.reverse(axisValues);
+
                 // Create the line for the chart
                 Line line = new Line(points).setColor(Color.BLUE).setCubic(false);
                 List<Line> lines = new ArrayList<>();
@@ -172,6 +176,7 @@ public class MainActivity extends Activity {
 
                 // Set up the X-axis with the formatted timestamps
                 Axis xAxis = new Axis();
+                // Order the axis values in ascending order
                 xAxis.setValues(axisValues); // Assign the X-axis labels
                 xAxis.setName("Time"); // Optional: X-axis title
                 xAxis.setTextColor(Color.BLACK); // Customize axis label color
@@ -241,7 +246,7 @@ public class MainActivity extends Activity {
                         }
 
                         // Ensure this logic runs after the limit is retrieved
-                        if (value != null && Double.parseDouble(value) > limit[0]) {
+                        if (value != null && Double.parseDouble(value) < limit[0]) {
                             mainImage.setColorFilter(Color.GREEN);
                         } else {
                             mainImage.setColorFilter(Color.RED);
